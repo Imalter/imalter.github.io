@@ -1,1 +1,224 @@
-"Hello World"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Playfocus</title>
+	<link href="src/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+	<link href="src/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+	<link href="src/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<!-- Modal About -->
+	<div class="modal fade" id="modalContacts" tabindex="-1" aria-labelledby="modalContactsLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content rounded-5 border border-0 pf-shadow p-3 pt-1">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalContactsLabel">Contacts</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<h3>Playfocus Limited, Cyprus<h2>
+					<p>Global games development studio creating engaging Idle Arcade and Hybrid Casual mobile games</p>
+					<p><a href="mailto:info@playfocus.games"><i class="bi bi-envelope-fill fs-5 me-2"></i></i>info@playfocus.games</a></p>
+					<p><a href="https://www.linkedin.com/company/playfocus/"><i class="bi bi-linkedin fs-5 me-2"></i></i>Linkedin</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal Join Us -->
+	<div class="modal fade" id="modalJoinUs" tabindex="-1" aria-labelledby="modalJoinUsLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content rounded-5 border border-0 pf-shadow p-3 pt-1">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalJoinUsLabel">Join Us</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>We’re always on the lookout for exceptional talent. If you feel that Playfocus is the right place for you, let's connect!</p>
+					<form id="joinUsForm" class="needs-validation" novalidate>
+						<input type="text" class="form-control mb-3" id="joinUsInputName" placeholder="Name" name="user_name" required="">
+						<input type="email" class="form-control mb-3" id="joinUsInputEmail" placeholder="Email address" name="user_email" required="">
+						<textarea class="form-control mb-3" id="joinUsInputPosition" rows="1" placeholder="Desired position" name="position" required=""></textarea>
+						<textarea class="form-control mb-3" id="joinUsInputMessage" rows="8" placeholder="Message: please share your background, experiences and show off your best work" name="message" required=""></textarea>
+						<button type="submit" class="btn btn-primary w-100 rounded-pill btn-lg mt-5" value="Send">Send</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal Success -->
+	<div class="modal fade" id="modalSuccess" tabindex="-1" aria-labelledby="modalSuccessLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content rounded-5 border border-0 pf-shadow p-3 pt-1">
+				<div class="modal-header border border-0 pb-2">
+					<h1 class="modal-title fs-5" id="modalContactsLabel">Email sent successfully!</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal Error -->
+	<div class="modal fade" id="modalError" tabindex="-1" aria-labelledby="modalErrorLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content rounded-5 border border-danger-subtle border-5 pf-shadow p-3 pt-1">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalContactsLabel">An error occurred</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Please try again later or contact us at the following email address:</p>
+					<p><a href="mailto:jobs@playfocus.games"><i class="bi bi-envelope-fill fs-5 me-2"></i></i>jobs@playfocus.games</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Navbar -->
+	<nav class="navbar d-flex justify-content-end">
+		<div>
+			<a type="button" data-bs-toggle="modal" data-bs-target="#modalContacts">Contacts</a>
+			<a type="button" data-bs-toggle="modal" data-bs-target="#modalJoinUs">Join Us</a>
+		</div>
+	</nav>
+	
+	<!-- Content -->
+	<div class="scroll-container gap-5" id="scroll-container">
+		<div class="pf-item pf-item-first d-flex flex-column">
+			<div class="pf-hello flex-grow-1 d-flex flex-column gap-4">
+				<h1>playfocus</h1>
+				<div>
+					<button type="button" data-bs-toggle="modal" data-bs-target="#modalJoinUs" class="btn btn-outline-primary rounded-pill fs-5 ps-5 pe-5">Join Us</button>
+				</div>
+			</div>
+			<p class="mt-auto">Global games development studio creating engaging Idle Arcade and Hybrid Casual mobile games</p>
+		</div>
+		<div class="pf-item d-flex">
+			<div class="pf-app-screen-root">
+				<video autoplay muted loop src="src/kof/video.mp4" class="pf-app-screen rounded-5 object-fit-fill" poster="src/kof/screen.png"></video>
+			</div>
+			<div class="pf-app-description d-flex gap-3">
+				<a href="https://play.google.com/store/apps/details?id=com.playfocus.king"><div class="pf-app-icon rounded-5 pf-shadow flex-shrink-0" style="background-image: url(src/kof/icon.png)"></div></a>
+				<div class="flex-grow-1 d-flex flex-column justify-content-between">
+					<div>
+						<h2>King Or Fail</h2>
+						<p>Start with just a small squad of swordsmen and a few berry trees, then get working to build a city</p>
+					</div>
+					<div class="pf-stores pf-pc">
+						<a href="https://apps.apple.com/us/app/king-or-fail-castle-takeover/id1672225232"><i class="bi bi-apple"></i></a>
+						<a href="https://play.google.com/store/apps/details?id=com.playfocus.king"><i class="bi bi-google-play"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="pf-item d-flex">
+			<div class="pf-app-screen-root">
+				<img src="src/wip/screen.png" class="pf-app-screen rounded-5 object-fit-fill"></img>
+			</div>
+			<div class="pf-app-description d-flex gap-3">
+				<div class="pf-app-icon-root">
+					<div class="pf-app-icon rounded-5 pf-shadow flex-shrink-0" style="background-image: url(src/wip/icon.png)"></div>
+				</div>
+				<div class="flex-grow-1 d-flex flex-column justify-content-between">
+					<div>
+						<h2>Work In Progress</h2>
+						<p>Exciting projects are in the works! Jump in and be part of the action!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function switchModals(hideModalId, showModalId) {
+			let hideElement = document.getElementById(hideModalId);
+			let showElement = document.getElementById(showModalId);
+		
+			let hideModal = bootstrap.Modal.getInstance(hideElement) || new bootstrap.Modal(hideElement);
+			let showModal = new bootstrap.Modal(showElement);
+		
+			hideElement.addEventListener('hidden.bs.modal', function () {
+				showModal.show();
+			}, { once: true });
+		
+			hideModal.hide();
+		}
+	
+		(function() {
+			emailjs.init({
+			publicKey: "UqPbW4cc1IA8O8-gi",
+			});
+		})();
+		
+		document.addEventListener('DOMContentLoaded', function () {
+			'use strict'
+		
+			// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			const forms = document.querySelectorAll('.needs-validation');
+		
+			// Loop over them and prevent submission
+			forms.forEach(form => {
+				form.addEventListener('submit', event => {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+		
+					form.classList.add('was-validated');
+				}, false);
+			});
+			
+			const scrollContainer = document.getElementById('scroll-container');
+
+			scrollContainer.addEventListener('wheel', function (event) {
+				if (window.innerWidth > 768) {
+					event.preventDefault();
+					scrollContainer.scrollBy({ 
+						left: event.deltaY * 2,
+						behavior: 'smooth'
+					});
+				}
+			});
+			
+			let form = document.getElementById('joinUsForm');
+			let submitButton = form.querySelector('button[type="submit"]');
+			
+			form.addEventListener('submit', function(event) {
+				event.preventDefault();
+			
+				if (!this.checkValidity()) {
+					this.classList.add('was-validated');
+					return;
+				}
+			
+				submitButton.disabled = true;
+			
+				emailjs.sendForm('service_p1xjiqm', 'join_us', this)
+					.then(() => {
+						console.log('Join Us mail - success');
+						switchModals('modalJoinUs', 'modalSuccess');
+						form.reset();
+						form.classList.remove('was-validated');
+					})
+					.catch((error) => {
+						console.log('Join Us mail - error', error);
+						switchModals('modalJoinUs', 'modalError');
+					})
+					.finally(() => {
+						submitButton.disabled = false;
+					});
+			});
+		});
+	</script>
+</body>
+</html>
