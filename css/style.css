@@ -1,7 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=block');
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
 :root {
 	--bs-border-radius-xxl: 3.5vh;
 	--pf-color: #00388D;
-	--pf-color-shadow-rgb: rgba(0, 72, 240, 0.2)
+	--pf-color-shadow-rgb: rgba(0, 72, 240, 0.2);
+	--bs-font-sans-serif: Onest, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 video {
@@ -13,7 +29,6 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	font-family: "Onest", serif;
 	font-optical-sizing: auto;
 	font-weight: 400;
 	font-style: normal;
