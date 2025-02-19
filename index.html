@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" data-bs-theme="light">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -34,7 +34,7 @@
 		</div>
 	</div>
 	
-	<!-- Modal Join Us -->
+	<!-- Modal Join Us Form -->
 	<div class="modal fade" id="modalJoinUs" tabindex="-1" aria-labelledby="modalJoinUsLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content rounded-5 border border-0 pf-shadow p-3 pt-1">
@@ -56,7 +56,7 @@
 		</div>
 	</div>
 	
-	<!-- Modal Success -->
+	<!-- Modal Join Us Success -->
 	<div class="modal fade" id="modalSuccess" tabindex="-1" aria-labelledby="modalSuccessLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content rounded-5 border border-0 pf-shadow p-3 pt-1">
@@ -68,7 +68,7 @@
 		</div>
 	</div>
 	
-	<!-- Modal Error -->
+	<!-- Modal Join Us Error -->
 	<div class="modal fade" id="modalError" tabindex="-1" aria-labelledby="modalErrorLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content rounded-5 border border-danger-subtle border-5 pf-shadow p-3 pt-1">
@@ -94,6 +94,8 @@
 	
 	<!-- Content -->
 	<div class="scroll-container gap-5 fade-in" id="scroll-container">
+		
+		<!-- Item hello -->
 		<div class="pf-item pf-item-first d-flex flex-column">
 			<div class="pf-hello flex-grow-1 d-flex flex-column gap-4">
 				<h1>playfocus</h1>
@@ -103,6 +105,8 @@
 			</div>
 			<p class="mt-auto">Global games development studio creating engaging Idle Arcade and Hybrid Casual mobile games</p>
 		</div>
+		
+		<!-- Item KOF -->
 		<div class="pf-item d-flex">
 			<div class="pf-app-screen-root">
 				<video autoplay muted loop src="src/kof/video.mp4" class="pf-app-screen rounded-5 object-fit-fill" poster="src/kof/screen.jpg"></video>
@@ -112,7 +116,7 @@
 				<div class="flex-grow-1 d-flex flex-column justify-content-between">
 					<div>
 						<h2>King Or Fail</h2>
-						<p>Start with just a small squad of swordsmen and a few berry trees, then get working to build a city</p>
+						<p>Start with just a small squad of swordsmen and a few berry trees, then get working to build a city</p>
 					</div>
 					<div class="pf-stores pf-pc">
 						<a href="https://apps.apple.com/us/app/king-or-fail-castle-takeover/id1672225232"><i class="bi bi-apple"></i></a>
@@ -121,6 +125,8 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- Item WIP -->
 		<div class="pf-item d-flex">
 			<div class="pf-app-screen-root">
 				<img src="src/wip/screen.jpg" class="pf-app-screen rounded-5 object-fit-fill"></img>
@@ -161,11 +167,9 @@
 		
 		document.addEventListener('DOMContentLoaded', function () {
 			'use strict'
-		
-			// Fetch all the forms we want to apply custom Bootstrap validation styles to
+
 			const forms = document.querySelectorAll('.needs-validation');
-		
-			// Loop over them and prevent submission
+
 			forms.forEach(form => {
 				form.addEventListener('submit', event => {
 					if (!form.checkValidity()) {
