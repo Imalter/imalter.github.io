@@ -114,7 +114,7 @@ a:hover {
 	height: 100%;
 	padding-top: 10vh;
 	padding-bottom: 10vh;
-	gap: 1.5vw;
+	gap: 2.5vh;
 }
 
 .pf-item-first {
@@ -125,10 +125,6 @@ a:hover {
 .pf-app-description {
 	width: 45%;
 	flex-direction: column !important;
-}
-
-.pf-app-screen-root {
-	filter: drop-shadow(0 1rem 2rem var(--pf-color-shadow-rgb));
 }
 
 .pf-app-screen {
@@ -169,6 +165,10 @@ a:hover {
 
 .pf-shadow {
 	box-shadow: 0 1rem 2rem var(--pf-color-shadow-rgb) !important;
+}
+
+.pf-shadow-filter {
+	filter: drop-shadow(0 1rem 2rem var(--pf-color-shadow-rgb));
 }
 
 @media (max-width: 768px) {
@@ -214,7 +214,6 @@ a:hover {
 
 	.pf-item {
 		width: 100%;
-		height: 100vh;
 		flex-wrap: wrap;
 		padding: 0;
 		gap: 1.5rem;
@@ -232,6 +231,12 @@ a:hover {
 	}
 	
 	.pf-app-screen {
+		width: 100%;
+		height: 100%;
+	}
+	
+	.pf-app-screen-root {
+		filter: drop-shadow(0 1rem 2rem var(--pf-color-shadow-rgb));
 		width: 92vw;
 		height: calc((92vw / 9) * 16);
 	}
