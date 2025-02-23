@@ -133,6 +133,11 @@ a:hover {
 	overflow: hidden;
 }
 
+.pf-app-icon-root {
+	position: relative;
+	z-index: 2;
+}
+
 .pf-app-icon {
 	width: 18vh;
 	height: 18vh;
@@ -164,10 +169,6 @@ a:hover {
 }
 
 .pf-shadow {
-	box-shadow: 0 1rem 2rem var(--pf-color-shadow-rgb) !important;
-}
-
-.pf-shadow-filter {
 	filter: drop-shadow(0 1rem 2rem var(--pf-color-shadow-rgb));
 }
 
@@ -236,7 +237,6 @@ a:hover {
 	}
 	
 	.pf-app-screen-root {
-		filter: drop-shadow(0 1rem 2rem var(--pf-color-shadow-rgb));
 		width: 92vw;
 		height: calc((92vw / 9) * 16);
 	}
