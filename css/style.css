@@ -242,8 +242,8 @@ a:hover {
 	}
 	
 	.pf-app-icon {
-		width: 7rem;
-		height: 7rem;
+		width: 29vw;
+		height: 29vw;
 	}
 	
 	.pf-hello {
@@ -252,15 +252,8 @@ a:hover {
 		text-align: center;
 	}
 	
-	.pf-stores {
-		margin-top: 1rem;
-		flex-direction: row !important;
-		justify-content: center;
-		gap: 5vw;
-	}
-	
 	.pf-mobile {
-		display: inline;
+		display: flex;
 	}
 	
 	.pf-pc {
