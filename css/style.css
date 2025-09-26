@@ -171,6 +171,25 @@ a:hover {
 .pf-shadow {
 	filter: drop-shadow(0 1rem 2rem var(--pf-color-shadow-rgb));
 }
+.scroll-container {
+	-webkit-overflow-scrolling: touch;
+}
+.scroll-container.dragging {
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+.pf-item {
+	flex: 0 0 auto;
+}
+
+.pf-app-screen-root video {
+	pointer-events: none;
+}
+
+.pf-app-screen-root img {
+	pointer-events: none;
+}
 
 @media (max-width: 768px) {
 	body {
