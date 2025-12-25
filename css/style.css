@@ -47,6 +47,21 @@ body {
 	--bs-btn-disabled-border-color: var(--pf-color);
 }
 
+.pf-join-btn {
+	transition: transform 260ms ease, box-shadow 260ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.pf-join-btn:hover {
+		transform: translateY(-4px) scale(1.02);
+		box-shadow: 0 1rem 2rem rgba(0, 72, 240, 0.18);
+	}
+}
+
+.pf-join-btn:active {
+	transform: translateY(-1px);
+}
+
 .bi {
 	font-size: 5vh;	
 }
@@ -127,21 +142,29 @@ a:hover {
 	flex-direction: column !important;
 }
 
+.pf-app-screen-root {
+	position: relative;
+	perspective: 1400px;
+}
+
 .pf-app-screen {
 	width: calc((80vh / 16) * 9);
 	height: 80vh;
 	overflow: hidden;
+	transition: transform 420ms cubic-bezier(0.17, 0.84, 0.44, 1), filter 420ms ease, box-shadow 420ms ease;
 }
 
 .pf-app-icon-root {
 	position: relative;
 	z-index: 2;
+	perspective: 1200px;
 }
 
 .pf-app-icon {
 	width: 18vh;
 	height: 18vh;
 	background-size: cover;
+	transition: transform 320ms cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 320ms ease, filter 320ms ease;
 }
 
 .pf-hello {
@@ -152,12 +175,25 @@ a:hover {
 .pf-stores {
 	display: flex;
 	flex-direction: column !important;
-	gap: 0;
+	gap: 0.75rem;
 }
 
 .pf-stores a {
 	margin: 0;
 	padding: 0;
+}
+
+.pf-mobile a {
+	/* keep inline default sizing */
+}
+
+.pf-store-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-start;
+	line-height: 1;
+	transition: transform 240ms ease, filter 240ms ease;
 }
 
 .pf-mobile {
@@ -189,6 +225,29 @@ a:hover {
 
 .pf-app-screen-root img {
 	pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.pf-app-screen-root:hover .pf-app-screen {
+		transform: translateY(-10px) scale(1.02) rotateX(4deg) rotateY(-3deg);
+		filter: saturate(1.08) contrast(1.05);
+		box-shadow: 0 1.4rem 2.6rem rgba(0, 72, 240, 0.25);
+	}
+
+	.pf-app-icon-root:hover .pf-app-icon {
+		transform: translateY(-8px) scale(1.05) rotateZ(-3deg);
+		filter: saturate(1.1);
+		box-shadow: 0 1.1rem 2rem rgba(0, 72, 240, 0.22);
+	}
+
+	.pf-store-link:hover {
+		transform: translateY(-4px) scale(1.08);
+		filter: drop-shadow(0 0.8rem 1.2rem rgba(0, 72, 240, 0.18));
+	}
+}
+
+.pf-store-link:active {
+	transform: translateY(-2px) scale(1.02);
 }
 
 @media (max-width: 768px) {
