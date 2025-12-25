@@ -1,0 +1,39 @@
+[
+  {
+    "title": "Royal Lands",
+    "description": "Play as a King who is building his kingdom from the ground up? Royal Lands has the perfect blend of strategy and idle gameplay for all ages to enjoy - harvest items, build your kingdom, and gain citizens, but also go on adventures to conquer castles and enemies as your realm grows!",
+    "video": { "src": "src/rl/video.mp4", "poster": "src/rl/screen.jpg" },
+    "icon": "src/rl/icon.jpg",
+    "stores": {
+      "ios": "https://apps.apple.com/ru/app/royal-lands-save-the-king/id6755301032",
+      "android": "https://play.google.com/store/apps/details?id=com.playfocus.royal"
+    }
+  },
+  {
+    "title": "Renovation Day",
+    "description": "In this house flipper simulator game, you've got a can-do attitude and a hammer, so nothing can stand in your way! Get to cleaning up and unpacking everything",
+    "video": { "src": "src/rd/video.mp4", "poster": "src/rd/screen.jpg" },
+    "icon": "src/rd/icon.jpg",
+    "stores": {
+      "ios": "https://apps.apple.com/us/app/renovation-day-house-makeover/id6741324757",
+      "android": "https://play.google.com/store/apps/details?id=com.jedi.renovation"
+    }
+  },
+  {
+    "title": "King Or Fail",
+    "description": "Start with just a small squad of swordsmen and a few berry trees, then get working to build a city",
+    "video": { "src": "src/kof/video.mp4", "poster": "src/kof/screen.jpg" },
+    "icon": "src/kof/icon.jpg",
+    "stores": {
+      "ios": "https://apps.apple.com/us/app/king-or-fail-castle-takeover/id1672225232",
+      "android": "https://play.google.com/store/apps/details?id=com.playfocus.king"
+    }
+  },
+  {
+    "title": "Work In Progress",
+    "description": "Exciting projects are in the works! Jump in and be part of the action!",
+    "image": "src/wip/screen.jpg",
+    "icon": "src/wip/icon.jpg",
+    "stores": {}
+  }
+]

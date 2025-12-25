@@ -137,6 +137,10 @@ a:hover {
 	padding-right: 5vw;
 }
 
+#pf-apps-root {
+	display: contents;
+}
+
 .pf-app-description {
 	width: 45%;
 	flex-direction: column !important;
