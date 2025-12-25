@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const renderMedia = (app) => {
 		if (app.video) {
 			const posterAttr = app.video.poster ? ` poster="${app.video.poster}"` : '';
-			return `<video autoplay muted loop playsinline src="${app.video.src}" class="pf-app-screen rounded-5 object-fit-fill pf-media"${posterAttr}></video>`;
+			return `<video autoplay muted loop playsinline preload="metadata" src="${app.video.src}" class="pf-app-screen rounded-5 object-fit-fill pf-media"${posterAttr}></video>`;
 		}
 		if (app.image) {
 			return `<img src="${app.image}" class="pf-app-screen rounded-5 object-fit-fill pf-media" loading="lazy" alt="${app.title || 'App screenshot'}" />`;
@@ -142,12 +142,23 @@ document.addEventListener('DOMContentLoaded', function () {
 			const skeleton = shell.querySelector('.pf-skeleton');
 			if (!media) return;
 
+			let revealed = false;
 			const reveal = () => {
+				if (revealed) return;
+				revealed = true;
 				media.classList.add('pf-media-loaded');
 				if (skeleton) skeleton.remove();
 			};
 
 			if (media.tagName === 'VIDEO') {
+				const posterSrc = media.getAttribute('poster');
+				if (posterSrc) {
+					const posterImg = new Image();
+					posterImg.onload = reveal;
+					posterImg.onerror = () => {};
+					posterImg.src = posterSrc;
+				}
+
 				if (media.readyState >= 2) {
 					reveal();
 				} else {
