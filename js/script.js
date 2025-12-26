@@ -176,6 +176,63 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	};
 
+	// Enable tilt only for precise hover devices (desktop, pen).
+	const enableTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+	// Adds pointer-position-driven 3D tilt to a single app card.
+	const attachTilt = (card) => {
+		if (!enableTilt) return;
+		const shell = card.querySelector('.pf-app-screen-root');
+		const media = shell ? shell.querySelector('.pf-app-screen') : null;
+		if (!shell || !media) return;
+
+		const maxRotateX = 6; // deg
+		const maxRotateY = 8; // deg
+		const liftPx = 8;
+		const scale = 1.015;
+		let rafId = null;
+		let lastEvent = null;
+
+		const applyTilt = (ev) => {
+			if (!ev) return;
+			const rect = shell.getBoundingClientRect();
+			const normX = ((ev.clientX - rect.left) / rect.width) * 2 - 1; // -1..1
+			const normY = ((ev.clientY - rect.top) / rect.height) * 2 - 1; // -1..1
+			const rotateX = -normY * maxRotateX;
+			const rotateY = normX * maxRotateY;
+
+			media.style.transform = `translateY(-${liftPx}px) scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+		};
+
+		const scheduleUpdate = (ev) => {
+			lastEvent = ev;
+			if (rafId) return;
+			rafId = requestAnimationFrame(() => {
+				rafId = null;
+				applyTilt(lastEvent);
+			});
+		};
+
+		const resetTilt = () => {
+			media.style.transform = '';
+			shell.classList.remove('pf-tilt-active');
+		};
+
+		shell.addEventListener('pointerenter', (ev) => {
+			if (ev.pointerType && ev.pointerType !== 'mouse' && ev.pointerType !== 'pen') return;
+			shell.classList.add('pf-tilt-active');
+			scheduleUpdate(ev);
+		});
+
+		shell.addEventListener('pointermove', (ev) => {
+			if (ev.pointerType && ev.pointerType !== 'mouse' && ev.pointerType !== 'pen') return;
+			scheduleUpdate(ev);
+		});
+
+		shell.addEventListener('pointerleave', resetTilt);
+		shell.addEventListener('pointercancel', resetTilt);
+	};
+
 	async function loadApps() {
 		if (!appsRoot) return;
 		showPlaceholders(PLACEHOLDER_COUNT);
@@ -202,6 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				const card = wrapper.firstElementChild;
 				if (card) {
 					wireMediaLoaders(card);
+					attachTilt(card);
 					fragment.appendChild(card);
 				}
 			});
