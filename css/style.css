@@ -225,6 +225,7 @@ a:hover {
 	min-width: calc((80vh / 16) * 9);
 	height: 80vh;
 	flex: 0 0 auto;
+	z-index: 1;
 }
 
 .pf-app-screen {
@@ -320,9 +321,14 @@ a:hover {
 }
 
 @media (hover: hover) and (pointer: fine) {
+	.pf-app-screen-root.pf-tilt-active {
+		z-index: 3;
+		filter: drop-shadow(0 1.4rem 2.6rem rgba(0, 72, 240, 0.25));
+	}
+
 	.pf-app-screen-root.pf-tilt-active .pf-app-screen {
 		filter: saturate(1.08) contrast(1.05);
-		box-shadow: 0 1.4rem 2.6rem rgba(0, 72, 240, 0.25);
+		box-shadow: none;
 	}
 
 	.pf-app-icon-shell:hover .pf-app-icon {

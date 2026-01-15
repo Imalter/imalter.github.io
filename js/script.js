@@ -227,6 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				wrapper.innerHTML = renderAppCard(app, templatesData).trim();
 				const card = wrapper.firstElementChild;
 				if (card) {
+					if (app.video) card.classList.add('pf-has-video');
 					wireMediaLoaders(card);
 					attachTilt(card);
 					fragment.appendChild(card);
