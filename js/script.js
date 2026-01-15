@@ -1,4 +1,3 @@
-// JS extracted from index.html
 function switchModals(hideModalId, showModalId) {
 	const hideElement = document.getElementById(hideModalId);
 	const showElement = document.getElementById(showModalId);
@@ -38,48 +37,30 @@ document.addEventListener('DOMContentLoaded', function () {
 	const appsRoot = document.getElementById('pf-apps-root');
 	const PLACEHOLDER_COUNT = 3;
 
-	const renderPlaceholderStores = () => {
-		return `
-			<div class="pf-skeleton pf-skeleton-chip"></div>
-			<div class="pf-skeleton pf-skeleton-chip"></div>
-		`;
+	const renderTemplate = (template, data) => {
+		if (!template) return '';
+		return template.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (_, key) => {
+			const value = data[key];
+			return value === undefined || value === null ? '' : value;
+		});
 	};
 
-	const renderPlaceholderCard = () => {
-		return `
-			<div class="pf-item d-flex pf-placeholder">
-				<div class="pf-app-screen-root pf-media-shell rounded-5">
-					<div class="pf-skeleton"></div>
-				</div>
-				<div class="pf-app-description d-flex gap-3">
-					<div class="pf-app-icon-root d-flex flex-column gap-3">
-						<div class="pf-app-icon-shell pf-media-shell rounded-5">
-							<div class="pf-skeleton"></div>
-						</div>
-						<div class="pf-mobile justify-content-center gap-2">
-							${renderPlaceholderStores()}
-						</div>
-					</div>
-					<div class="flex-grow-1 d-flex flex-column justify-content-between">
-						<div class="d-flex flex-column gap-2">
-							<div class="pf-skeleton pf-skeleton-text" style="width: 70%;"></div>
-							<div class="pf-skeleton pf-skeleton-text"></div>
-							<div class="pf-skeleton pf-skeleton-text pf-skeleton-text-sm"></div>
-						</div>
-						<div class="pf-stores pf-pc">
-							${renderPlaceholderStores()}
-						</div>
-					</div>
-				</div>
-			</div>
-		`;
+	const renderPlaceholderStores = (templatesData) => {
+		if (!templatesData) return '';
+		return renderTemplate(templatesData.placeholderStores, {});
 	};
 
-	const showPlaceholders = (count = PLACEHOLDER_COUNT) => {
-		if (!appsRoot) return;
+	const renderPlaceholderCard = (templatesData) => {
+		if (!templatesData) return '';
+		const placeholderStores = renderPlaceholderStores(templatesData);
+		return renderTemplate(templatesData.placeholderCard, { placeholderStores });
+	};
+
+	const showPlaceholders = (templatesData, count = PLACEHOLDER_COUNT) => {
+		if (!appsRoot || !templatesData) return;
 		for (let i = 0; i < count; i++) {
 			const wrapper = document.createElement('div');
-			wrapper.innerHTML = renderPlaceholderCard().trim();
+			wrapper.innerHTML = renderPlaceholderCard(templatesData).trim();
 			const card = wrapper.firstElementChild;
 			if (card) appsRoot.appendChild(card);
 		}
@@ -108,31 +89,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		return '';
 	};
 
-	const renderAppCard = (app) => {
-		return `
-			<div class="pf-item d-flex">
-				<div class="pf-app-screen-root pf-shadow pf-media-shell rounded-5">
-					<div class="pf-skeleton"></div>
-					${renderMedia(app)}
-				</div>
-				<div class="pf-app-description d-flex gap-3">
-					<div class="pf-app-icon-root d-flex flex-column gap-3">
-						<div class="pf-app-icon-shell pf-media-shell rounded-5 flex-shrink-0">
-							<div class="pf-skeleton"></div>
-							<img src="${app.icon}" class="pf-app-icon rounded-5 pf-media" loading="lazy" alt="${app.title || 'App icon'}" />
-						</div>
-						${renderStores(app.stores, 'pf-mobile justify-content-center gap-2')}
-					</div>
-					<div class="flex-grow-1 d-flex flex-column justify-content-between">
-						<div>
-							<h2>${app.title}</h2>
-							<p>${app.description}</p>
-						</div>
-						${renderStores(app.stores, 'pf-stores pf-pc')}
-					</div>
-				</div>
-			</div>
-		`;
+	const renderAppCard = (app, templatesData) => {
+		if (!templatesData) return '';
+		return renderTemplate(templatesData.appCard, {
+			media: renderMedia(app),
+			icon: app.icon || '',
+			title: app.title || '',
+			iconAlt: app.title || 'App icon',
+			description: app.description || '',
+			storesMobile: renderStores(app.stores, 'pf-mobile justify-content-center gap-2'),
+			storesDesktop: renderStores(app.stores, 'pf-stores pf-pc')
+		});
 	};
 
 	const wireMediaLoaders = (card) => {
@@ -235,8 +202,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	async function loadApps() {
 		if (!appsRoot) return;
-		showPlaceholders(PLACEHOLDER_COUNT);
+		const templatesData = window.PF_TEMPLATES || null;
 		try {
+			showPlaceholders(templatesData, PLACEHOLDER_COUNT);
+
 			const tryFetch = async (url) => {
 				const res = await fetch(url, { cache: 'no-cache' });
 				if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
@@ -255,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			const fragment = document.createDocumentFragment();
 			appsData.forEach(app => {
 				const wrapper = document.createElement('div');
-				wrapper.innerHTML = renderAppCard(app).trim();
+				wrapper.innerHTML = renderAppCard(app, templatesData).trim();
 				const card = wrapper.firstElementChild;
 				if (card) {
 					wireMediaLoaders(card);
@@ -267,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		} catch (err) {
 			console.error('Failed to load app cards from JSON', err);
 			clearPlaceholders();
-			showPlaceholders(PLACEHOLDER_COUNT);
+			showPlaceholders(templatesData, PLACEHOLDER_COUNT);
 		}
 	}
 
