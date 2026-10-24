@@ -5,21 +5,21 @@ window.PF_TEMPLATES = {
 		<div class="pf-skeleton pf-skeleton-chip"></div>
 	`,
 	placeholderCard: `
-		<div class="pf-item d-flex pf-placeholder">
-			<div class="pf-app-screen-root pf-media-shell rounded-5">
+		<div class="pf-item pf-placeholder" aria-hidden="true">
+			<div class="pf-app-screen-root pf-media-shell">
 				<div class="pf-skeleton"></div>
 			</div>
-			<div class="pf-app-description d-flex gap-3">
-				<div class="pf-app-icon-root d-flex flex-column gap-3">
-					<div class="pf-app-icon-shell pf-media-shell rounded-5">
+			<div class="pf-app-description">
+				<div class="pf-app-icon-root">
+					<div class="pf-app-icon-shell pf-media-shell">
 						<div class="pf-skeleton"></div>
 					</div>
-					<div class="pf-mobile justify-content-center gap-2">
+					<div class="pf-mobile">
 						{{placeholderStores}}
 					</div>
 				</div>
-				<div class="flex-grow-1 d-flex flex-column justify-content-between">
-					<div class="d-flex flex-column gap-2">
+				<div class="pf-app-text">
+					<div class="pf-skeleton-lines">
 						<div class="pf-skeleton pf-skeleton-text" style="width: 70%;"></div>
 						<div class="pf-skeleton pf-skeleton-text"></div>
 						<div class="pf-skeleton pf-skeleton-text pf-skeleton-text-sm"></div>
@@ -32,27 +32,40 @@ window.PF_TEMPLATES = {
 		</div>
 	`,
 	appCard: `
-		<div class="pf-item d-flex">
-			<div class="pf-app-screen-root pf-shadow pf-media-shell rounded-5">
-				<div class="pf-skeleton"></div>
-				{{media}}
+		<article class="pf-item" aria-labelledby="pf-app-{{index}}-title">
+			<div class="pf-app-screen-root pf-media-shell">
+				<div class="pf-app-screen">
+					<div class="pf-skeleton"></div>
+					{{media}}
+					<span class="pf-app-sheen" aria-hidden="true"></span>
+					{{toggle}}
+				</div>
 			</div>
-			<div class="pf-app-description d-flex gap-3">
-				<div class="pf-app-icon-root d-flex flex-column gap-3">
-					<div class="pf-app-icon-shell pf-media-shell rounded-5 flex-shrink-0">
+			<div class="pf-app-description">
+				<div class="pf-app-icon-root">
+					<div class="pf-app-icon-shell pf-media-shell">
 						<div class="pf-skeleton"></div>
-						<img src="{{icon}}" class="pf-app-icon rounded-5 pf-media" loading="lazy" alt="{{iconAlt}}" />
+						<img src="{{icon}}" class="pf-app-icon pf-media" width="512" height="512" loading="lazy" decoding="async" alt="{{iconAlt}}">
 					</div>
 					{{storesMobile}}
 				</div>
-				<div class="flex-grow-1 d-flex flex-column justify-content-between">
+				<div class="pf-app-text">
 					<div>
-						<h2>{{title}}</h2>
+						<h2 id="pf-app-{{index}}-title">{{title}}</h2>
 						<p>{{description}}</p>
 					</div>
 					{{storesDesktop}}
 				</div>
 			</div>
-		</div>
-	`
+		</article>
+	`,
+	poster: `<img src="{{src}}" class="pf-app-poster pf-media" width="720" height="1280" loading="{{loading}}" fetchpriority="{{priority}}" decoding="async" alt="{{alt}}">`,
+	video: `<video class="pf-app-video" data-src="{{src}}" muted loop playsinline preload="none" aria-label="{{label}}"></video>`,
+	toggle: `
+		<button type="button" class="pf-app-toggle" aria-label="Pause video">
+			<svg class="pf-icon pf-icon-pause" aria-hidden="true"><use href="#i-pause"></use></svg>
+			<svg class="pf-icon pf-icon-play" aria-hidden="true"><use href="#i-play"></use></svg>
+		</button>
+	`,
+	storeLink: `<a class="pf-store-link" href="{{href}}" target="_blank" rel="noopener" aria-label="{{label}}" data-magnetic><svg class="pf-icon" aria-hidden="true"><use href="#{{icon}}"></use></svg></a>`
 };

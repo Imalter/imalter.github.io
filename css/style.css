@@ -1,43 +1,208 @@
-@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=block');
+/* ==========================================================================
+   Playfocus
+   ========================================================================== */
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+/* Onest (SIL OFL 1.1, see fonts/OFL.txt), self-hosted variable font */
+@font-face {
+	font-family: 'Onest';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('../fonts/onest-cyrillic.woff2') format('woff2');
+	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
-.fade-in {
-  animation: fadeIn 1s ease-out;
+@font-face {
+	font-family: 'Onest';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('../fonts/onest-latin-ext.woff2') format('woff2');
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+	font-family: 'Onest';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('../fonts/onest-latin.woff2') format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 :root {
-	--bs-border-radius-xxl: 3.5vh;
+	--pf-radius: 3.5vh;
 	--pf-color: #00388D;
+	--pf-color-rgb: 0 56 141;
+	--pf-accent: #0048F0;
+	--pf-accent-rgb: 0 72 240;
 	--pf-color-shadow-rgb: rgba(0, 72, 240, 0.2);
-	--bs-font-sans-serif: Onest, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--pf-danger: #DC3545;
+	--pf-font: Onest, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	/* Motion */
+	--pf-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--pf-ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+	--pf-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+	--pf-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--pf-ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
 }
+
+/* Real damped springs where the browser supports linear() easing */
+@supports (transition-timing-function: linear(0, 1)) {
+	:root {
+		--pf-ease-bounce: linear(0, 0.063, 0.217, 0.413, 0.615, 0.796, 0.942, 1.047, 1.112, 1.143, 1.146, 1.131, 1.106, 1.076, 1.047, 1.022, 1.002, 0.989, 0.981, 0.978, 0.979, 0.982, 0.986, 0.99, 0.994, 0.998, 1, 1.002, 1.003, 1.003, 1);
+		--pf-ease-spring: linear(0, 0.029, 0.1, 0.196, 0.302, 0.411, 0.514, 0.609, 0.693, 0.765, 0.825, 0.875, 0.914, 0.945, 0.969, 0.986, 0.998, 1.006, 1.011, 1.014, 1.015, 1.015, 1.014, 1.013, 1.011, 1.01, 1.008, 1.006, 1.005, 1.004, 1);
+	}
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	color-scheme: light;
+}
+
+body {
+	color: var(--pf-color);
+	background: #fff;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: var(--pf-font);
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 1rem;
+	line-height: 1.5;
+	-webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3 {
+	margin: 0 0 0.5rem;
+	line-height: 1.2;
+}
+
+h1, h2 {
+	font-weight: 800;
+}
+
+h1 {
+	font-size: 12vh;
+}
+
+h2 {
+	font-size: 5vh;
+	margin-bottom: 0.25rem;
+}
+
+h3 {
+	font-size: calc(1.3rem + 0.6vw);
+	font-weight: 500;
+}
+
+@media (min-width: 1200px) {
+	h3 {
+		font-size: 1.75rem;
+	}
+}
+
+p {
+	margin: 0 0 1rem;
+	font-weight: 400;
+	font-size: 1.1rem;
+}
+
+a {
+	color: var(--pf-color);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img, svg, video {
+	vertical-align: middle;
+}
+
+button, input, textarea {
+	margin: 0;
+	font: inherit;
+	color: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+::selection {
+	background: var(--pf-color);
+	color: #fff;
+}
+
+:focus-visible {
+	outline: 2px solid var(--pf-accent);
+	outline-offset: 3px;
+}
+
+/* ---------- Helpers ---------- */
+
+.pf-sr {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.pf-sprite {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+
+.pf-icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+	vertical-align: -0.125em;
+	flex: none;
+}
+
+/* Letters split for animation keep their own boxes */
+.pf-word {
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.pf-ch,
+.pf-ch-in {
+	display: inline-block;
+}
+
+.pf-ch-in {
+	transform-origin: 50% 85%;
+}
+
+/* ---------- Loading skeletons ---------- */
 
 @keyframes pfShimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-@keyframes pfFadeInMedia {
-  from {
-    opacity: 0;
-    transform: scale(0.995);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
 }
 
 .pf-skeleton {
@@ -49,9 +214,16 @@
 	animation: pfShimmer 1.2s ease-in-out infinite;
 }
 
-.pf-media-shell > .pf-skeleton {
+.pf-media-shell > .pf-skeleton,
+.pf-app-screen > .pf-skeleton {
 	position: absolute;
 	inset: 0;
+}
+
+.pf-skeleton-lines {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
 
 .pf-skeleton-text {
@@ -71,11 +243,6 @@
 	width: 9rem;
 }
 
-.pf-media-shell {
-	position: relative;
-	overflow: visible;
-}
-
 .pf-media {
 	opacity: 0;
 	transition: opacity 220ms ease;
@@ -83,7 +250,6 @@
 
 .pf-media-loaded {
 	opacity: 1;
-	animation: pfFadeInMedia 280ms ease;
 }
 
 .pf-placeholder .pf-app-screen-root,
@@ -92,69 +258,7 @@
 	overflow: hidden;
 }
 
-video {
-   clip-path: fill-box; 
-}
-
-body {
-	color: var(--pf-color);
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 1rem;
-}
-
-.btn-outline-primary {
-	--bs-btn-color: var(--pf-color);
-	--bs-btn-border-color: var(--pf-color);
-	--bs-btn-hover-bg: var(--pf-color);
-	--bs-btn-hover-border-color: var(--pf-color);
-	--bs-btn-active-color: #fff;
-	--bs-btn-active-bg: var(--pf-color);
-	--bs-btn-active-border-color: var(--pf-color);
-	--bs-btn-disabled-color: var(--pf-color);
-	--bs-btn-disabled-border-color: var(--pf-color);
-}
-
-.pf-join-btn {
-	transition: transform 260ms ease, box-shadow 260ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-	.pf-join-btn:hover {
-		transform: translateY(-4px) scale(1.02);
-		box-shadow: 0 1rem 2rem rgba(0, 72, 240, 0.18);
-	}
-}
-
-.pf-join-btn:active {
-	transform: translateY(-1px);
-}
-
-.bi {
-	font-size: 5vh;	
-}
-
-p {
-	font-weight: 400;
-	font-size: 1.1rem;
-}
-
-h1, h2 {
-	font-weight: 800;
-}
-
-h1 {
-	font-size: 12vh;
-}
-
-h2 {
-	font-size: 5vh;
-	margin-bottom: 0.25rem;
-}
+/* ---------- Navbar ---------- */
 
 .navbar {
 	position: fixed;
@@ -162,41 +266,79 @@ h2 {
 	left: 0;
 	width: 100%;
 	height: 10vh;
-	align-pf-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 	padding: 0 2.5rem;
 	z-index: 1000;
+	pointer-events: none;
 }
 
-a {
-	color: var(--pf-color);
-	text-decoration: none;
+.navbar > * {
+	pointer-events: auto;
 }
 
-.navbar a {
+.pf-nav-link {
+	position: relative;
 	margin-inline-start: 1vw;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--pf-color);
+	font-size: 1rem;
+	line-height: 1.5;
 }
 
-a:hover {
-	text-decoration: underline !important;
+/* Underline draws in from the left and leaves to the right */
+.pf-nav-link::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0.05em;
+	height: 1px;
+	background: currentColor;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 450ms var(--pf-ease-out);
 }
+
+.pf-nav-link:hover::after,
+.pf-nav-link:focus-visible::after {
+	transform: scaleX(1);
+	transform-origin: left;
+}
+
+/* ---------- Horizontal stage ---------- */
 
 .scroll-container {
+	position: relative;
 	display: flex;
-	overflow-x: auto;
+	gap: 3rem;
 	height: 100vh;
 	width: 100vw;
-	padding: 0 4vw 0 4vw;
+	padding: 0 4vw;
+	overflow-x: auto;
+	overflow-y: hidden;
+	overscroll-behavior-x: none;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
-	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
 }
 
 .scroll-container::-webkit-scrollbar {
 	display: none;
 }
 
+.pf-dragging .scroll-container {
+	cursor: grabbing;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
 .pf-item {
 	flex: 0 0 auto;
+	display: flex;
 	width: calc(100vh - 20vh);
 	height: 100%;
 	padding-top: 10vh;
@@ -204,18 +346,95 @@ a:hover {
 	gap: 2.5vh;
 }
 
-.pf-item-first {
-	padding-bottom: 5vh;
-	padding-right: 5vw;
-}
-
 #pf-apps-root {
 	display: contents;
 }
 
+/* ---------- Hello item ---------- */
+
+.pf-item-first {
+	flex-direction: column;
+	padding-bottom: 5vh;
+	padding-right: 5vw;
+}
+
+.pf-hello {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	margin-top: 15.5vh;
+}
+
+.pf-hello h1 {
+	align-self: flex-start;
+	cursor: default;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.pf-tagline {
+	margin-top: auto;
+}
+
+/* Outline pill with a liquid fill rising on hover */
+.pf-join-btn {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	display: inline-block;
+	padding: 0.375rem 3rem;
+	border: 1px solid var(--pf-color);
+	border-radius: 50rem;
+	background: transparent;
+	color: var(--pf-color);
+	font-size: 1.25rem;
+	line-height: 1.5;
+	/* Magnetic pull uses `translate`, so it never fights the hover `transform` */
+	transition: color 450ms var(--pf-ease-out), transform 600ms var(--pf-ease-bounce), box-shadow 450ms ease, translate 500ms var(--pf-ease-out);
+}
+
+.pf-join-btn::before {
+	content: '';
+	position: absolute;
+	inset: -1px;
+	z-index: -1;
+	background: var(--pf-color);
+	border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+	transform: translateY(102%);
+	transition: transform 550ms var(--pf-ease-out), border-radius 550ms var(--pf-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.pf-join-btn:hover {
+		color: #fff;
+		transform: translateY(-4px) scale(1.02);
+		box-shadow: 0 1rem 2rem rgba(0, 72, 240, 0.18);
+	}
+
+	.pf-join-btn:hover::before {
+		transform: translateY(0);
+		border-radius: 0;
+	}
+}
+
+.pf-join-btn:active {
+	color: #fff;
+	transform: translateY(-1px);
+}
+
+.pf-join-btn:active::before {
+	transform: translateY(0);
+	border-radius: 0;
+}
+
+/* ---------- App items ---------- */
+
 .pf-app-description {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 	width: 45%;
-	flex-direction: column !important;
 }
 
 .pf-app-screen-root {
@@ -226,67 +445,144 @@ a:hover {
 	height: 80vh;
 	flex: 0 0 auto;
 	z-index: 1;
+	border-radius: var(--pf-radius);
 }
 
 .pf-app-screen {
+	position: relative;
+	isolation: isolate;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	transform-style: preserve-3d;
+	border-radius: var(--pf-radius);
+	background: #f6f8ff;
+	box-shadow: 0 1rem 2rem var(--pf-color-shadow-rgb);
 	transform-origin: center;
-	transition: transform 140ms ease, filter 220ms ease, box-shadow 220ms ease;
+	transition: filter 220ms ease, box-shadow 320ms ease;
 	will-change: transform;
+}
+
+/* Media round their own corners: Safari draws video on a separate layer
+   that the parent's rounded overflow does not clip */
+.pf-app-poster,
+.pf-app-video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: inherit;
+	pointer-events: none;
+	user-select: none;
+	-webkit-user-drag: none;
+}
+
+.pf-app-poster {
+	transition: opacity 220ms ease, clip-path 1100ms var(--pf-ease-out) 150ms, scale 1500ms var(--pf-ease-out) 150ms;
+}
+
+.pf-app-video {
+	opacity: 0;
+	transition: opacity 500ms ease, clip-path 1100ms var(--pf-ease-out) 150ms, scale 1500ms var(--pf-ease-out) 150ms;
+}
+
+.pf-app-video.is-ready {
+	opacity: 1;
+}
+
+/* Light that glides across the screen while it tilts */
+.pf-app-sheen {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	border-radius: inherit;
+	pointer-events: none;
+	background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.34), transparent 55%);
+	mix-blend-mode: soft-light;
+	opacity: 0;
+	transition: opacity 400ms ease;
+}
+
+/* Play / pause: shown on hover and keyboard focus, flashes on tap */
+.pf-app-toggle {
+	position: absolute;
+	right: 1.6vh;
+	bottom: 1.6vh;
+	z-index: 3;
+	display: grid;
+	place-items: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.78);
+	color: var(--pf-color);
+	font-size: 1.15rem;
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 0.5rem 1rem rgba(0, 56, 141, 0.18);
+	opacity: 0;
+	transform: scale(0.6);
+	transition: opacity 260ms ease, transform 500ms var(--pf-ease-bounce);
+}
+
+.pf-app-screen-root:hover .pf-app-toggle,
+.pf-app-toggle:focus-visible,
+.pf-app-screen.is-flash .pf-app-toggle {
+	opacity: 1;
+	transform: none;
+}
+
+.pf-app-toggle .pf-icon-play,
+.is-paused .pf-app-toggle .pf-icon-pause {
+	display: none;
+}
+
+.is-paused .pf-app-toggle .pf-icon-play {
+	display: inline-block;
 }
 
 .pf-app-icon-root {
 	position: relative;
 	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 	perspective: 1200px;
 }
 
 .pf-app-icon-shell {
+	position: relative;
+	flex-shrink: 0;
 	width: 18vh;
 	height: 18vh;
+	border-radius: var(--pf-radius);
 }
 
 .pf-app-icon {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	border-radius: var(--pf-radius);
 	box-shadow: 0 0.75rem 1.35rem rgba(0, 72, 240, 0.14);
-	transition: transform 320ms cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 320ms ease, filter 320ms ease;
+	transition: opacity 220ms ease, transform 700ms var(--pf-ease-bounce), box-shadow 320ms ease, filter 320ms ease;
 	pointer-events: none;
 	user-select: none;
 	-webkit-user-drag: none;
 }
 
-.pf-hello {
-	margin-top: 15.5vh;
-	justify-content: top;
+.pf-app-text {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .pf-stores {
 	display: flex;
-	flex-direction: column !important;
+	flex-direction: column;
 	gap: 0.75rem;
-}
-
-.pf-stores a {
-	margin: 0;
-	padding: 0;
-}
-
-.pf-mobile a {
-	/* keep inline default sizing */
-}
-
-.pf-store-link {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	align-self: flex-start;
-	line-height: 1;
-	transition: transform 240ms ease, filter 240ms ease;
 }
 
 .pf-mobile {
@@ -297,38 +593,35 @@ a:hover {
 	display: flex;
 }
 
-.pf-shadow {
-	filter: drop-shadow(0 1rem 2rem var(--pf-color-shadow-rgb));
-}
-.scroll-container {
-	-webkit-overflow-scrolling: touch;
-}
-.scroll-container.dragging {
-	user-select: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-}
-.pf-item {
-	flex: 0 0 auto;
+.pf-store-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-start;
+	margin: 0;
+	padding: 0;
+	font-size: 5vh;
+	line-height: 1;
+	color: var(--pf-color);
+	transition: transform 600ms var(--pf-ease-bounce), filter 240ms ease, opacity 400ms ease var(--pf-delay, 0ms), scale 800ms var(--pf-ease-bounce) var(--pf-delay, 0ms), translate 400ms var(--pf-ease-out);
 }
 
-.pf-app-screen-root video {
-	pointer-events: none;
-}
-
-.pf-app-screen-root img {
-	pointer-events: none;
+.pf-store-link + .pf-store-link {
+	--pf-delay: 90ms;
 }
 
 @media (hover: hover) and (pointer: fine) {
 	.pf-app-screen-root.pf-tilt-active {
 		z-index: 3;
-		filter: drop-shadow(0 1.4rem 2.6rem rgba(0, 72, 240, 0.25));
 	}
 
 	.pf-app-screen-root.pf-tilt-active .pf-app-screen {
 		filter: saturate(1.08) contrast(1.05);
-		box-shadow: none;
+		box-shadow: 0 1.4rem 2.6rem rgba(0, 72, 240, 0.25);
+	}
+
+	.pf-app-screen-root.pf-tilt-active .pf-app-sheen {
+		opacity: 1;
 	}
 
 	.pf-app-icon-shell:hover .pf-app-icon {
@@ -347,45 +640,883 @@ a:hover {
 	transform: translateY(-2px) scale(1.02);
 }
 
+/* Scroll-driven depth: --d is the item's distance from its resting spot,
+   --pf-skew follows scroll velocity. Both are set by script on wide screens. */
+@media (min-width: 769px) {
+	/* The description trails a little behind the screen and settles beside it */
+	.pf-item:not(.pf-placeholder) .pf-app-screen-root {
+		translate: calc(clamp(-1, var(--d, 0), 1) * 1vh) 0;
+		transform: skewX(var(--pf-skew, 0deg));
+	}
+
+	.pf-item:not(.pf-placeholder) .pf-app-description {
+		translate: calc(clamp(-0.5, var(--d, 0), 1.5) * 4vh) 0;
+		transform: skewX(calc(var(--pf-skew, 0deg) * 0.5));
+	}
+
+	.pf-item-first .pf-hello {
+		translate: calc(var(--d, 0) * -14vh) 0;
+	}
+}
+
+/* Phones on their side: little height, so the text column gets real width and tighter type,
+   and whatever still doesn't fit scrolls inside the column instead of being cut off */
+@media (min-width: 769px) and (max-height: 540px) {
+	.pf-item:not(.pf-item-first):not(.pf-placeholder) {
+		width: auto;
+	}
+
+	.pf-app-description {
+		flex-shrink: 0;
+		width: 19rem;
+	}
+
+	.pf-app-text {
+		min-height: 0;
+	}
+
+	.pf-app-text > div {
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		scrollbar-width: thin;
+	}
+
+	.pf-app-text p {
+		margin-bottom: 0.5rem;
+		font-size: 0.875rem;
+		line-height: 1.45;
+	}
+
+	.pf-stores {
+		flex-direction: row;
+		gap: 1rem;
+		padding-top: 0.5rem;
+	}
+
+	/* Keep the store icons big enough for a thumb */
+	.pf-store-link {
+		font-size: max(5vh, 1.5rem);
+	}
+}
+
+/* ---------- Modals ---------- */
+
+.pf-modal {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	max-height: none;
+	margin: 0;
+	padding: 1.75rem 1rem;
+	border: 0;
+	background: transparent;
+	color: var(--pf-color);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+
+.pf-modal[open] {
+	display: flex;
+	/* Column flow: auto margins centre the card, and a taller card starts at the top instead of overflowing upwards */
+	flex-direction: column;
+}
+
+/* Lock the page behind an open dialog, iOS included */
+.pf-modal-open,
+.pf-modal-open body {
+	overflow: hidden;
+}
+
+.pf-modal::backdrop {
+	background: rgba(0, 18, 56, 0.45);
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+}
+
+.pf-modal-content {
+	position: relative;
+	z-index: 1;
+	/* Never squeezed to the screen height: a tall card scrolls inside the dialog instead */
+	flex-shrink: 0;
+	width: 100%;
+	max-width: 500px;
+	margin: auto;
+	padding: 0.25rem 1rem 1rem;
+	background: #fff;
+	border-radius: var(--pf-radius);
+	box-shadow: 0 2rem 4rem -1rem rgba(0, 40, 140, 0.35), 0 0 0 1px rgba(0, 56, 141, 0.04);
+	overflow: hidden;
+}
+
+@media (min-width: 992px) {
+	.pf-modal-content {
+		max-width: 800px;
+	}
+}
+
+.pf-modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem;
+	border-bottom: 1px solid #dee2e6;
+}
+
+.pf-modal-title {
+	margin: 0;
+	font-size: 1.25rem;
+	line-height: 1.5;
+	outline: none;
+}
+
+.pf-modal-body {
+	padding: 1rem;
+}
+
+.pf-modal-body a {
+	display: inline-flex;
+	align-items: center;
+	background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+	transition: background-size 450ms var(--pf-ease-out);
+}
+
+.pf-modal-body a:hover {
+	text-decoration: none;
+	background-size: 100% 1px;
+}
+
+.pf-link-icon {
+	margin-right: 0.5rem;
+	font-size: 1.25rem;
+	transition: transform 500ms var(--pf-ease-bounce);
+}
+
+.pf-modal-body a:hover .pf-link-icon {
+	transform: rotate(-8deg) scale(1.15);
+}
+
+.pf-close {
+	display: grid;
+	place-items: center;
+	flex: none;
+	width: 2.25rem;
+	height: 2.25rem;
+	margin: -0.5rem -0.5rem -0.5rem auto;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	color: var(--pf-color);
+	font-size: 1rem;
+	transition: background-color 250ms ease, transform 500ms var(--pf-ease-bounce);
+}
+
+.pf-close:hover {
+	background: rgba(0, 56, 141, 0.08);
+	transform: rotate(90deg);
+}
+
+/* Spring in, quick fade out */
+@keyframes pfFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes pfFadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes pfModalIn {
+	from {
+		transform: translate3d(0, 2.5rem, 0) scale(0.94);
+	}
+	to {
+		transform: none;
+	}
+}
+
+@keyframes pfModalOut {
+	to {
+		opacity: 0;
+		transform: translate3d(0, 1rem, 0) scale(0.97);
+	}
+}
+
+.pf-modal[open]::backdrop {
+	animation: pfFadeIn 400ms ease both;
+}
+
+.pf-modal[open] .pf-modal-content {
+	animation: pfModalIn 800ms var(--pf-ease-spring) both, pfFadeIn 300ms ease both;
+}
+
+.pf-modal.is-closing::backdrop {
+	animation: pfFadeOut 280ms ease both;
+}
+
+.pf-modal.is-closing .pf-modal-content {
+	animation: pfModalOut 280ms var(--pf-ease-in) both;
+}
+
+/* ---------- Join Us ---------- */
+
+.pf-modal-join .pf-modal-content {
+	max-width: 680px;
+	padding: 2.75rem 2.75rem 2.25rem;
+	border-radius: 2rem;
+}
+
+/* A soft brand glow in the corner gives the sheet some depth */
+.pf-modal-join .pf-modal-content::before {
+	content: '';
+	position: absolute;
+	top: -12rem;
+	right: -10rem;
+	width: 26rem;
+	height: 26rem;
+	border-radius: 50%;
+	background: radial-gradient(closest-side, rgba(0, 72, 240, 0.12), transparent);
+	pointer-events: none;
+}
+
+.pf-close-float {
+	position: absolute;
+	top: 1.25rem;
+	right: 1.25rem;
+	z-index: 2;
+	margin: 0;
+	width: 2.75rem;
+	height: 2.75rem;
+	background: rgba(0, 56, 141, 0.06);
+	font-size: 1.05rem;
+}
+
+.pf-modal-view {
+	position: relative;
+}
+
+.pf-join-head {
+	position: relative;
+	margin-bottom: 1.75rem;
+	padding-right: 3rem;
+}
+
+.pf-join-title {
+	margin: 0 0 0.75rem;
+	font-size: clamp(2.25rem, 5vh, 3rem);
+	line-height: 1;
+	letter-spacing: -0.03em;
+	outline: none;
+}
+
+.pf-join-lead {
+	margin: 0;
+	max-width: 34rem;
+	color: rgba(0, 56, 141, 0.78);
+}
+
+/* Floating-label fields */
+.pf-form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0 0.875rem;
+}
+
+.pf-field {
+	position: relative;
+	margin-bottom: 0.875rem;
+}
+
+.pf-field-input {
+	display: block;
+	width: 100%;
+	height: 3.75rem;
+	padding: 1.5rem 2.75rem 0.5rem 1.125rem;
+	border: 1.5px solid rgba(0, 56, 141, 0.1);
+	border-radius: 1rem;
+	background: #f4f7fd;
+	color: var(--pf-color);
+	font-size: 1rem;
+	line-height: 1.5;
+	outline: none;
+	-webkit-appearance: none;
+	appearance: none;
+	transition: border-color 250ms ease, background-color 250ms ease, box-shadow 250ms ease;
+}
+
+textarea.pf-field-input {
+	height: auto;
+	min-height: 9.5rem;
+	max-height: 22rem;
+	padding-top: 1.875rem;
+	resize: none;
+	overflow-y: auto;
+}
+
+.pf-field-input::placeholder {
+	color: transparent;
+	transition: color 250ms ease;
+}
+
+.pf-field-input:focus::placeholder {
+	color: rgba(0, 56, 141, 0.4);
+}
+
+.pf-field-input:hover {
+	border-color: rgba(0, 56, 141, 0.22);
+}
+
+.pf-field-input:focus {
+	background: #fff;
+	border-color: var(--pf-accent);
+	box-shadow: 0 0 0 4px rgba(0, 72, 240, 0.12);
+}
+
+.pf-field-label {
+	position: absolute;
+	top: 1.125rem;
+	left: 1.2rem;
+	max-width: calc(100% - 3.5rem);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: rgba(0, 56, 141, 0.6);
+	font-size: 1rem;
+	line-height: 1.5rem;
+	pointer-events: none;
+	transform-origin: 0 0;
+	transition: transform 350ms var(--pf-ease-out), color 250ms ease;
+}
+
+.pf-field-input:focus + .pf-field-label,
+.pf-field-input:not(:placeholder-shown) + .pf-field-label {
+	transform: translate3d(0, -0.6875rem, 0) scale(0.75);
+}
+
+.pf-field-input:focus + .pf-field-label {
+	color: var(--pf-accent);
+}
+
+.pf-field-ok {
+	position: absolute;
+	top: 1.3rem;
+	right: 1.1rem;
+	color: var(--pf-accent);
+	font-size: 1.15rem;
+	opacity: 0;
+	transform: scale(0.3) rotate(-30deg);
+	transition: opacity 200ms ease, transform 500ms var(--pf-ease-bounce);
+}
+
+.pf-field.is-valid .pf-field-ok {
+	opacity: 1;
+	transform: none;
+}
+
+.pf-field-error {
+	display: block;
+	max-height: 0;
+	padding-left: 0.25rem;
+	overflow: hidden;
+	color: var(--pf-danger);
+	font-size: 0.8125rem;
+	line-height: 1.25rem;
+	opacity: 0;
+	transform: translateY(-4px);
+	transition: max-height 350ms var(--pf-ease-out), margin 350ms var(--pf-ease-out), opacity 250ms ease, transform 350ms var(--pf-ease-out);
+}
+
+.pf-field.is-invalid .pf-field-input {
+	border-color: var(--pf-danger);
+	background: #fff7f7;
+}
+
+.pf-field.is-invalid .pf-field-input:focus {
+	box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.12);
+}
+
+.pf-field.is-invalid .pf-field-label {
+	color: var(--pf-danger);
+}
+
+.pf-field.is-invalid .pf-field-error {
+	max-height: 2.5rem;
+	margin-top: 0.375rem;
+	opacity: 1;
+	transform: none;
+}
+
+@keyframes pfShake {
+	0%, 100% { transform: translateX(0); }
+	20% { transform: translateX(-8px); }
+	40% { transform: translateX(7px); }
+	60% { transform: translateX(-5px); }
+	80% { transform: translateX(3px); }
+}
+
+.pf-field.is-shaking {
+	animation: pfShake 450ms ease;
+}
+
+/* Submit: liquid fill on hover, collapses into a spinner while sending */
+.pf-submit {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.625rem;
+	width: 100%;
+	height: 3.75rem;
+	margin: 1.75rem auto 0;
+	padding: 0 1.5rem;
+	border: 0;
+	border-radius: 50rem;
+	background: var(--pf-color);
+	color: #fff;
+	font-size: 1.15rem;
+	font-weight: 600;
+	box-shadow: 0 0.875rem 1.75rem -0.75rem rgba(0, 72, 240, 0.65);
+	transition: width 600ms var(--pf-ease-out), transform 500ms var(--pf-ease-bounce), box-shadow 300ms ease;
+}
+
+.pf-submit::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: var(--pf-accent);
+	border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+	transform: translateY(102%);
+	transition: transform 550ms var(--pf-ease-out), border-radius 550ms var(--pf-ease-out);
+}
+
+.pf-submit:hover::before,
+.pf-submit:focus-visible::before {
+	transform: translateY(0);
+	border-radius: 0;
+}
+
+.pf-submit:hover {
+	box-shadow: 0 1.125rem 2.25rem -0.75rem rgba(0, 72, 240, 0.75);
+}
+
+.pf-submit:active {
+	transform: scale(0.98);
+}
+
+.pf-submit-label,
+.pf-submit-arrow {
+	transition: opacity 200ms ease;
+}
+
+.pf-submit-arrow {
+	position: relative;
+	width: 1em;
+	height: 1em;
+	overflow: hidden;
+	font-size: 1rem;
+}
+
+.pf-submit-arrow .pf-icon {
+	position: absolute;
+	inset: 0;
+	transition: transform 500ms var(--pf-ease-out);
+}
+
+.pf-submit-arrow .pf-icon + .pf-icon {
+	transform: translate(-150%, 150%);
+}
+
+.pf-submit:hover .pf-submit-arrow .pf-icon:first-child {
+	transform: translate(150%, -150%);
+}
+
+.pf-submit:hover .pf-submit-arrow .pf-icon + .pf-icon {
+	transform: none;
+}
+
+@keyframes pfSpin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.pf-submit-spinner {
+	position: absolute;
+	inset: 0;
+	width: 1.5rem;
+	height: 1.5rem;
+	margin: auto;
+	border: 2.5px solid rgba(255, 255, 255, 0.3);
+	border-top-color: #fff;
+	border-radius: 50%;
+	opacity: 0;
+	animation: pfSpin 750ms linear infinite;
+	transition: opacity 200ms ease;
+}
+
+.pf-submit.is-loading {
+	width: 3.75rem;
+	padding: 0;
+	pointer-events: none;
+}
+
+.pf-submit.is-loading .pf-submit-label,
+.pf-submit.is-loading .pf-submit-arrow {
+	opacity: 0;
+}
+
+.pf-submit.is-loading .pf-submit-spinner {
+	opacity: 1;
+	transition-delay: 250ms;
+}
+
+.pf-submit-soft {
+	width: auto;
+	min-width: 12rem;
+	color: var(--pf-color);
+	background: rgba(0, 56, 141, 0.07);
+	box-shadow: none;
+}
+
+.pf-submit-soft:hover {
+	color: #fff;
+	box-shadow: 0 1rem 2rem -0.75rem rgba(0, 72, 240, 0.6);
+}
+
+.pf-submit-soft::before {
+	background: var(--pf-color);
+}
+
+.pf-form-note {
+	margin: 1.125rem 0 0;
+	text-align: center;
+	font-size: 0.9375rem;
+	color: rgba(0, 56, 141, 0.66);
+}
+
+.pf-form-note a {
+	font-weight: 600;
+	background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+	transition: background-size 450ms var(--pf-ease-out);
+}
+
+.pf-form-note a:hover {
+	text-decoration: none;
+	background-size: 0 1px;
+	background-position: 100% 100%;
+}
+
+/* Result states */
+.pf-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem 0 0.25rem;
+	text-align: center;
+}
+
+.pf-state[hidden] {
+	display: none;
+}
+
+.pf-state-title {
+	margin: 1.5rem 0 0.5rem;
+	font-size: clamp(1.75rem, 4vh, 2.25rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	outline: none;
+}
+
+.pf-state-text {
+	max-width: 26rem;
+	margin: 0;
+	color: rgba(0, 56, 141, 0.78);
+}
+
+.pf-state .pf-submit {
+	width: auto;
+	min-width: 12rem;
+}
+
+.pf-state-check {
+	width: 5.5rem;
+	height: 5.5rem;
+	fill: none;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	overflow: visible;
+}
+
+.pf-state-check circle {
+	fill: rgba(0, 72, 240, 0.08);
+	stroke: var(--pf-accent);
+	stroke-width: 3;
+	stroke-dasharray: 1;
+	stroke-dashoffset: 1;
+	transform: rotate(-90deg);
+	transform-origin: center;
+}
+
+.pf-state-check path {
+	stroke: var(--pf-accent);
+	stroke-width: 5;
+	stroke-dasharray: 1;
+	stroke-dashoffset: 1;
+}
+
+@keyframes pfDraw {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes pfPop {
+	from {
+		transform: scale(0.4);
+	}
+	to {
+		transform: none;
+	}
+}
+
+.pf-state.is-active .pf-state-check {
+	animation: pfPop 900ms var(--pf-ease-bounce) both;
+}
+
+.pf-state.is-active .pf-state-check circle {
+	animation: pfDraw 700ms var(--pf-ease-out) 100ms both;
+}
+
+.pf-state.is-active .pf-state-check path {
+	animation: pfDraw 450ms var(--pf-ease-out) 550ms both;
+}
+
+.pf-state-alert {
+	display: grid;
+	place-items: center;
+	width: 5.5rem;
+	height: 5.5rem;
+	border-radius: 50%;
+	background: rgba(220, 53, 69, 0.1);
+	box-shadow: inset 0 0 0 3px rgba(220, 53, 69, 0.85);
+	color: var(--pf-danger);
+	font-size: 2.5rem;
+}
+
+.pf-state-error.is-active .pf-state-alert {
+	animation: pfPop 800ms var(--pf-ease-bounce) both, pfShake 500ms ease 450ms;
+}
+
+.pf-state-mail {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+	font-size: 1.15rem;
+	font-weight: 600;
+}
+
+.pf-modal-content.is-error {
+	box-shadow: 0 2rem 4rem -1rem rgba(140, 20, 40, 0.3), inset 0 0 0 4px #f1aeb5;
+}
+
+.pf-confetti {
+	position: fixed;
+	inset: 0;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+/* ---------- Intro & reveals ---------- */
+
+@keyframes pfCharIn {
+	from {
+		transform: translate3d(0, 0.55em, 0) rotate(8deg) scale(0.9);
+	}
+	to {
+		transform: none;
+	}
+}
+
+@keyframes pfFocusIn {
+	from {
+		opacity: 0;
+		filter: blur(10px);
+	}
+	to {
+		opacity: 1;
+		filter: none;
+	}
+}
+
+@keyframes pfRiseIn {
+	from {
+		transform: translate3d(0, 1.5rem, 0);
+	}
+	to {
+		transform: none;
+	}
+}
+
+@keyframes pfScreenIn {
+	from {
+		opacity: 0;
+		transform: perspective(1400px) translate3d(var(--pf-from-x, 10vh), var(--pf-from-y, 0), 0) rotateY(var(--pf-from-ry, -24deg)) rotateX(var(--pf-from-rx, 0deg)) scale(0.88);
+	}
+	35% {
+		opacity: 1;
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* Hidden until the fonts are in and the intro can play */
+.pf-js:not(.pf-ready) .navbar,
+.pf-js:not(.pf-ready) .pf-hello,
+.pf-js:not(.pf-ready) .pf-tagline {
+	opacity: 0;
+}
+
+.pf-ready .navbar {
+	animation: pfFadeIn 1s ease-out 500ms both;
+}
+
+/* "Rack focus": letters rise and pull into focus one by one */
+.pf-ready .pf-hello h1 .pf-ch {
+	animation: pfCharIn 1000ms var(--pf-ease-bounce) both, pfFocusIn 800ms var(--pf-ease-out) both;
+	animation-delay: calc(120ms + var(--i) * 55ms);
+}
+
+.pf-ready .pf-hello > div {
+	animation: pfRiseIn 900ms var(--pf-ease-spring) both, pfFocusIn 700ms var(--pf-ease-out) both;
+	animation-delay: 640ms;
+}
+
+.pf-ready .pf-tagline {
+	animation: pfRiseIn 900ms var(--pf-ease-spring) both, pfFocusIn 800ms var(--pf-ease-out) both;
+	animation-delay: 780ms;
+}
+
+/* App items assemble when they enter the viewport */
+.pf-js .pf-item:not(.pf-placeholder):not(.is-in) .pf-app-screen {
+	opacity: 0;
+}
+
+.pf-item.is-in .pf-app-screen {
+	animation: pfScreenIn 1200ms var(--pf-ease-spring) backwards;
+}
+
+/* The wipe keeps rounded corners too, so the clip never squares off the video in Safari */
+.pf-js .pf-item:not(.pf-placeholder):not(.is-in) :is(.pf-app-poster, .pf-app-video) {
+	clip-path: inset(100% 0 0 0 round var(--pf-radius));
+	scale: 1.25;
+}
+
+.pf-app-poster,
+.pf-app-video {
+	clip-path: inset(0 round var(--pf-radius));
+}
+
+.pf-js .pf-item:not(.pf-placeholder):not(.is-in) .pf-app-icon-shell {
+	opacity: 0;
+	scale: 0.4;
+	rotate: -18deg;
+}
+
+.pf-app-icon-shell {
+	transition: opacity 350ms ease 280ms, scale 900ms var(--pf-ease-bounce) 280ms, rotate 900ms var(--pf-ease-bounce) 280ms;
+}
+
+.pf-js .pf-item:not(.pf-placeholder):not(.is-in) h2 .pf-ch {
+	opacity: 0;
+	transform: translate3d(0, 0.55em, 0) rotate(8deg);
+}
+
+.pf-item h2 .pf-ch {
+	transition: opacity 400ms ease, transform 900ms var(--pf-ease-spring);
+	transition-delay: calc(380ms + var(--i) * 24ms);
+}
+
+.pf-js .pf-item:not(.pf-placeholder):not(.is-in) .pf-app-text p {
+	opacity: 0;
+	filter: blur(6px);
+	transform: translate3d(0, 1.25rem, 0);
+}
+
+.pf-app-text p {
+	transition: opacity 800ms ease 560ms, filter 800ms ease 560ms, transform 1000ms var(--pf-ease-out) 560ms;
+}
+
+.pf-js .pf-item:not(.pf-placeholder):not(.is-in) .pf-store-link {
+	opacity: 0;
+	scale: 0.5;
+}
+
+.pf-item.is-in .pf-store-link {
+	--pf-delay: 760ms;
+}
+
+.pf-item.is-in .pf-store-link + .pf-store-link {
+	--pf-delay: 860ms;
+}
+
+/* ---------- Phones ---------- */
+
 @media (max-width: 768px) {
 	body {
 		overflow-y: auto;
-		width: 100
 	}
 
 	h1 {
 		font-size: 18vw;
 	}
-	
+
 	h2 {
 		font-size: 2rem;
 		margin-bottom: 0.25rem;
 	}
+
 	p {
 		font-size: 1rem;
 	}
-	
-	.bi {
-		font-size: 8vw;	
-	}
-	
+
 	.navbar {
 		position: static;
 		height: 80px;
 		padding: 1.5rem;
 		text-align: center;
 	}
-	
-	.navbar a {
+
+	.pf-nav-link {
 		margin-inline-start: 1rem;
 	}
 
 	.scroll-container {
-		margin-top: 0;
 		flex-wrap: wrap;
 		overflow-x: visible;
 		height: auto;
-		padding: 0 4vw 0 4vw;
+		padding: 0 4vw;
 	}
 
 	.pf-item {
@@ -394,61 +1525,129 @@ a:hover {
 		padding: 0;
 		gap: 1.5rem;
 	}
-	
+
 	.pf-item-first {
+		flex-wrap: nowrap;
 		height: calc(80vh - 80px - 4vw);
 		padding: 0;
 	}
-	
+
 	.pf-app-description {
-		flex-direction: row !important;
+		flex-direction: row;
 		width: 100%;
-		height: 25%;
 		align-items: flex-start;
 	}
-	
-	.pf-app-screen {
-		width: 100%;
-		height: 100%;
-	}
-	
+
+	/* Full width on phones; on wider or sideways screens the video stays phone-sized */
 	.pf-app-screen-root {
 		width: 100%;
+		max-width: max(12.5rem, 49.5vh);
 		min-width: 0;
-		height: calc((100vw / 9) * 16);
+		height: auto;
+		aspect-ratio: 9 / 16;
 	}
-	
+
 	.pf-app-icon-shell {
 		width: 29vw;
 		height: 29vw;
-	}
-
-	.pf-app-icon {
-		width: 100%;
-		height: 100%;
 	}
 
 	.pf-app-icon-root {
 		align-items: flex-start;
 	}
 
-	.pf-mobile {
-		justify-content: flex-start;
-		align-items: flex-start;
-		gap: 0.75rem;
-	}
-	
 	.pf-hello {
 		margin-top: 0;
 		justify-content: center;
 		text-align: center;
 	}
-	
+
+	.pf-hello h1 {
+		align-self: center;
+	}
+
 	.pf-mobile {
 		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		gap: 0.5rem;
 	}
-	
+
 	.pf-pc {
 		display: none;
+	}
+
+	.pf-store-link {
+		font-size: 8vw;
+	}
+
+	/* Items lift towards the reader instead of flying in from the side */
+	.pf-item {
+		--pf-from-x: 0px;
+		--pf-from-y: 6vh;
+		--pf-from-ry: 0deg;
+		--pf-from-rx: 14deg;
+	}
+
+	/* Dialogs stay centred cards with a slim margin; a tall one scrolls from its top */
+	.pf-modal {
+		padding: max(0.75rem, env(safe-area-inset-top, 0px)) max(0.75rem, env(safe-area-inset-right, 0px)) max(0.75rem, env(safe-area-inset-bottom, 0px)) max(0.75rem, env(safe-area-inset-left, 0px));
+	}
+
+	.pf-modal-content {
+		max-width: none;
+		border-radius: 1.5rem;
+	}
+
+	.pf-modal-join .pf-modal-content {
+		padding: 1.75rem 1.25rem 1.5rem;
+	}
+
+	.pf-close-float {
+		top: 1rem;
+		right: 1rem;
+	}
+
+	.pf-form-row {
+		grid-template-columns: 1fr;
+	}
+
+	.pf-join-title {
+		font-size: 2.25rem;
+	}
+}
+
+/* Small phones on their side: the wordmark and the intro screen fit the short height */
+@media (max-width: 768px) and (orientation: landscape) {
+	h1 {
+		font-size: min(18vw, 20vh);
+	}
+
+	.pf-item-first {
+		height: auto;
+		min-height: calc(100vh - 80px);
+	}
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 1ms !important;
+		animation-delay: 0ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 1ms !important;
+		transition-delay: 0ms !important;
+	}
+
+	.pf-skeleton {
+		animation: none !important;
+	}
+
+	.pf-submit-spinner {
+		animation-duration: 1.5s !important;
+		animation-iteration-count: infinite !important;
 	}
 }
